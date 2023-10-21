@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 interface chatTypes {
     time: string,
@@ -8,6 +8,7 @@ interface chatTypes {
 
 function Main() {
     const [messages, setMessages] = useState<chatTypes[]>();
+    const refMain: RefObject<HTMLDivElement> = useRef(null);
 
     useEffect(() => {
         setInterval(() => {
@@ -16,12 +17,21 @@ function Main() {
             else if (messages && messages.length < chats.length) {
                 setMessages(chats)
             }
+
         }, 1000)
     }, [])
 
 
+    useEffect(()=>{
+        refMain.current?.scrollTo({ top: refMain.current.scrollHeight, behavior: "smooth" })
+    }, [messages])
+
+
     return (
-        <main className="w-full min-h-[80%] h-auto flex flex-col gap-3 p-4 py-6 overflow-auto">
+        <main
+            ref={refMain}
+            className="w-full min-h-[80%] h-auto flex flex-col gap-3 p-4 py-6 overflow-auto"
+        >
             {
                 messages &&
                 messages.map((msg, index) =>
