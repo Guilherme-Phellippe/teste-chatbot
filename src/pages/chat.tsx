@@ -42,7 +42,7 @@ function Chat() {
                     </main>
 
 
-                    <footer className="w-full h-[65px] absolute bottom-12 flex items-center">
+                    <footer className="w-full h-[65px] absolute bottom-8 flex items-center">
                         <div className="w-4/5 mx-4 p-2 rounded-3xl flex gap-2 items-center bg-white">
                             <Keyboard
                                 size={32}
