@@ -11,18 +11,20 @@ function Main() {
     const refMain: RefObject<HTMLDivElement> = useRef(null);
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             const chats: chatTypes[] = JSON.parse(localStorage.getItem("chat") || "[]")
             if (!messages) setMessages(chats)
             else if (messages && messages.length < chats.length) {
                 setMessages(chats)
             }
-
         }, 1000)
+
+
+        return () => clearInterval(interval)
     }, [])
 
 
-    useEffect(()=>{
+    useEffect(() => {
         refMain.current?.scrollTo({ top: refMain.current.scrollHeight, behavior: "smooth" })
     }, [messages])
 
