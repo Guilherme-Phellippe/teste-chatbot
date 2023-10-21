@@ -30,7 +30,7 @@ function Main() {
     return (
         <main
             ref={refMain}
-            className="w-full min-h-[80%] h-auto flex flex-col gap-3 p-4 py-6 overflow-auto"
+            className="w-full h-[80%] flex flex-col gap-3 p-4 py-6 overflow-auto"
         >
             {
                 messages &&
