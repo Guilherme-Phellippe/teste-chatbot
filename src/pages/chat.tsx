@@ -1,4 +1,4 @@
-import { Camera, DotsThreeVertical, Keyboard, Microphone, PaperPlaneRight, Paperclip, Phone, VideoCamera } from "@phosphor-icons/react";
+import { Camera, DotsThreeVertical, Keyboard, PaperPlaneRight, Paperclip, Phone, VideoCamera } from "@phosphor-icons/react";
 
 function Chat() {
     return (
