@@ -8,7 +8,7 @@ function Chat() {
                 <div className="w-full h-full flex flex-col justify-between">
 
 
-                    <header className="w-full h-[70px] bg-green_main flex justify-around items-center">
+                    <header className="w-full h-[65px] bg-green_main flex justify-around items-center">
 
                         <div className="w-[15%] flex justify-center">
                             <div className="w-[40px] h-[40px] rounded-full">
@@ -42,7 +42,7 @@ function Chat() {
                     </main>
 
 
-                    <footer className="w-full h-[65px] absolute bottom-6 flex items-center">
+                    <footer className="w-full h-[65px] absolute bottom-0 flex items-center">
                         <div className="w-4/5 mx-4 p-2 rounded-3xl flex gap-2 items-center bg-white">
                             <Keyboard
                                 size={32}
