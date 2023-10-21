@@ -5,7 +5,7 @@ function Chat() {
         <div className="w-screen h-screen flex justify-center items-center">
             <div className="w-full h-full md:h-[95%] max-w-[480px] rounded-sm flex">
 
-                <div className="w-full h-full flex flex-col justify-between relative">
+                <div className="w-full h-full flex flex-col justify-start relative">
 
 
                     <header className="w-full h-[65px] bg-green_main flex justify-around items-center">
@@ -38,7 +38,7 @@ function Chat() {
 
 
 
-                    <main className="w-full h-[80%] flex flex-col p-4 py-6">
+                    <main className="w-full h-auto flex flex-col p-4 py-6">
                         <div className="w-auto flex justify-end items-center ">
                             <p className="px-4 py-1 rounded-2xl bg-blue_light_dark">oi</p>
                         </div>
