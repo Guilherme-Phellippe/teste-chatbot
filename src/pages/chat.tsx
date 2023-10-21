@@ -38,7 +38,7 @@ function Chat() {
 
 
 
-                    <main className="w-full h-[95%] flex flex-col p-4 py-6">
+                    <main className="w-full h-[80%] flex flex-col p-4 py-6">
                         <div className="w-auto flex justify-end items-center ">
                             <p className="px-4 py-1 rounded-2xl bg-blue_light_dark">oi</p>
                         </div>
