@@ -2,8 +2,8 @@ import { Camera, DotsThreeVertical, Keyboard, PaperPlaneRight, Paperclip, Phone,
 
 function Chat() {
     return (
-        <div className="w-screen h-[80%] flex justify-center items-center">
-            <div className="w-full h-full md:h-[95%] max-w-[480px] rounded-sm flex">
+        <div className="w-screen h-screen flex justify-center items-center">
+            <div className="w-full h-[80%] md:h-[95%] max-w-[480px] rounded-sm flex">
 
                 <div className="w-full h-full flex flex-col justify-start relative">
 
