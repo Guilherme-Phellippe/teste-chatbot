@@ -3,7 +3,7 @@ import { Camera, DotsThreeVertical, Keyboard, PaperPlaneRight, Paperclip, Phone,
 function Chat() {
     return (
         <div className="w-screen h-screen flex justify-center items-center">
-            <div className="w-full h-full md:h-[95%] max-w-[480px] rounded-sm bg-blue_medium_dark flex">
+            <div className="w-full h-full md:h-[95%] max-w-[480px] rounded-sm flex">
 
                 <div className="w-full h-full flex flex-col justify-between relative">
 
@@ -20,8 +20,9 @@ function Chat() {
                             </div>
                         </div>
 
-                        <div className="w-[50%] cursor-pointer">
-                            <p>Nome do contato</p>
+                        <div className="w-[50%] cursor-pointer flex flex-col items-start justify-center">
+                            <p className="font-semibold ">Nome do contato</p>
+                            <span className="text-sm opacity-90 leading-3">Digitando...</span>
                         </div>
 
                         <div className="w-[40%] flex justify-evenly items-center">
@@ -37,8 +38,15 @@ function Chat() {
 
 
 
-                    <main className="w-full h-full bg-[url(https://i.ibb.co/SVh0S75/Design-sem-nome-removebg-preview.png)] opacity-10">
-                         
+                    <main className="w-full h-[95%] flex flex-col p-4 py-6">
+                        <div className="w-auto flex justify-end items-center ">
+                            <p className="px-4 py-1 rounded-2xl bg-blue_light_dark">oi</p>
+                        </div>
+                        <div className="w-auto flex justify-start items-center ">
+                            <p className="px-4 py-1 rounded-2xl bg-blue_light_dark">
+                                Olá, como vocês está?
+                            </p>
+                        </div>
                     </main>
 
 
