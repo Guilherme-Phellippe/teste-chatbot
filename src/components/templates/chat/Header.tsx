@@ -21,13 +21,14 @@ function Header() {
         if (store_name) {
             (async () => {
                 const client = await axios
-                    .get(`https://9e38-187-87-120-50.ngrok.io/client/${store_name}${guest_id && `/guest/${guest_id}`}`)
+                    .get(`https://9e38-187-87-120-50.ngrok.io/client/${store_name}${guest_id ? `/guest/${guest_id}`: ""}`)
                     .catch(err => console.log(err))
                     
+                    console.log(client)
                 if (client?.status === 200) {
                     const title = document.head.querySelector("title");
                     title && (title.textContent = "Bem-vindo - " + client.data.business_name)
-                    setChat(client.data.chat[0].messages)
+                    client.data?.chat && setChat(client.data.chat[0].messages)
                     setClientHeader(client.data)
                 }else navigate("/client-not-found")
             })();
