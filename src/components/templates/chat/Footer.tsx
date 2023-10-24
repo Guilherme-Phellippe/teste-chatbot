@@ -31,7 +31,7 @@ function Footer() {
 
         if (!guestId) {
             const guestCreated = await axios
-                .post(`http://localhost:3434/guest`, { s: params.stora_name })
+                .post(`https://9e38-187-87-120-50.ngrok.io/guest`, { s: params.stora_name })
                 .catch((error) => console.log({ message: "Error at create guest.", error }));
 
             console.log(guestCreated)
@@ -43,7 +43,7 @@ function Footer() {
         }
 
         const response = await axios
-            .post(`http://localhost:3434/chat/client/${params.store_name}/guest/${guestId}`, { message })
+            .post(`https://9e38-187-87-120-50.ngrok.io/chat/client/${params.store_name}/guest/${guestId}`, { message })
             .catch((error) => console.log({ message: "Error on request the response AI.", error }));
 
             console.log(response)
