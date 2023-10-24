@@ -1,39 +1,64 @@
+import axios from "axios";
 import { Camera, Keyboard, Microphone, PaperPlaneRight, Paperclip } from "@phosphor-icons/react";
-import { RefObject, useRef, useState } from "react";
+import { RefObject, useContext, useRef, useState } from "react";
+import { ChatContext } from "../../../context/chatContext";
+import { TypingContext } from "../../../context/typingContext";
+import { useParams } from "react-router-dom";
 
-interface chatTypes {
-    time: string, 
-    player: number,
-    message: string
-}
 
 function Footer() {
-    const [isTyping, setTyping] = useState<Boolean>();
+    const { setChat } = useContext(ChatContext)
+    const { setTyping } = useContext(TypingContext);
+    const [isTyping, setIsTyping] = useState<boolean>();
     const inputMessageRef: RefObject<HTMLInputElement> = useRef(null);
+    const params = useParams();
 
-    const handleCreateMessage = () => {
+    const handleCreateMessage = async () => {
         const date = new Date();
         const time = `${date.getHours()}:${date.getMinutes()}`
         const message = inputMessageRef.current?.value || ""
-        const chat: chatTypes[] = JSON.parse(localStorage.getItem("chat") || "[]") ;
 
-        chat.push({ time, player: 1, message })
-        chat.push({ time, player: 2, message: "Olá, sou um modelo de inteligência artificial provida pela Openai, infelizmente eu ainda não fui treinada para te ajudar." })
-
-        localStorage.setItem("chat", JSON.stringify(chat))
-
-        handleActionSendMessage();
         //clear input message
         inputMessageRef.current?.value && (inputMessageRef.current.value = "")
-    }
-
-
-    const handleActionSendMessage = () => {
+        setChat(chats=> {
+            if(chats) return [...chats, { time, player: 1, message }]
+            else return [{ time, player: 1, message }]
+        })
         setTyping(true)
+
+        //search guest in localhost
+        let guestId = localStorage.getItem("guestId") || null;
+
+        if (!guestId) {
+            const guestCreated = await axios
+                .post(`http://localhost:3434/guest`, { s: params.stora_name })
+                .catch((error) => console.log({ message: "Error at create guest.", error }));
+
+            console.log(guestCreated)
+
+            if(guestCreated?.status === 200){
+                localStorage.setItem("guestId", guestCreated.data.id)
+                guestId = guestCreated?.data.id
+            }
+        }
+
+        const response = await axios
+            .post(`http://localhost:3434/chat/client/${params.store_name}/guest/${guestId}`, { message })
+            .catch((error) => console.log({ message: "Error on request the response AI.", error }));
+
+            console.log(response)
+
+        if (response) {
+            //set typing bottom name contact
+            setChat(response.data.messages)
+            setTyping(false)
+        }
+
     }
+
 
     return (
-        <footer className="w-full h-[65px]  flex items-center">
+        <footer className="w-full h-[65px] flex items-center">
             <div className="w-4/5 mx-4 p-2 rounded-3xl flex gap-2 items-center bg-white">
                 <Keyboard
                     size={32}
@@ -44,7 +69,7 @@ function Footer() {
                     type="text"
                     className="w-[70%] bg-white text-zinc-800 outline-none"
                     placeholder="Messagem"
-                    onChange={({ target }) => target.value.length > 0 ? setTyping(true) : setTyping(false)}
+                    onChange={({ target }) => target.value.length > 0 ? setIsTyping(true) : setIsTyping(false)}
                     onKeyDown={(e) => e.code === "Enter" && handleCreateMessage()}
                 />
                 <Paperclip
