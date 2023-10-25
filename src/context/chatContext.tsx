@@ -1,26 +1,25 @@
 import { createContext, useState } from "react";
-import { chatTypes } from "../types/chatTypes";
+import { chatClientTypes } from "../types/chatTypes";
 
-interface ChatContextType {
-    chat: chatTypes[] | undefined,
-    setChat: React.Dispatch<React.SetStateAction<chatTypes[] | undefined>>
+interface ChatClientContextType {
+    chatClient: chatClientTypes | undefined,
+    setChatClient: React.Dispatch<React.SetStateAction<chatClientTypes | undefined>>
 }
 
-
-export const ChatContext = createContext<ChatContextType>({
-    chat: undefined,
-    setChat: ()=> []
+export const ChatClientContext = createContext<ChatClientContextType>({
+    chatClient: undefined,
+    setChatClient: ()=> {}
 })
 
 
-function ChatProvider({ children }: any) {
-    const [chat, setChat] = useState<chatTypes[]>();
+function ChatClientProvider({ children }: any) {
+    const [chatClient, setChatClient] = useState<chatClientTypes>();
 
     return (
-        <ChatContext.Provider value={{ chat, setChat }}>
+        <ChatClientContext.Provider value={{ chatClient, setChatClient }}>
             {children}
-        </ChatContext.Provider>
+        </ChatClientContext.Provider>
     )
 }
 
-export default ChatProvider;
+export default ChatClientProvider;

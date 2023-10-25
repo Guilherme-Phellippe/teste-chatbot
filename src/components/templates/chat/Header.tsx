@@ -1,53 +1,46 @@
-import axios from "axios";
 import { DotsThreeVertical, Phone, VideoCamera } from "@phosphor-icons/react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { TypingContext } from "../../../context/typingContext";
-import { useNavigate, useParams } from "react-router-dom";
-import { clientTypes } from "../../../types/clientTypes";
-import { ChatContext } from "../../../context/chatContext";
+import { ChatClientContext } from "../../../context/chatContext";
+import { useParams } from "react-router-dom";
+import { getChatInfo } from "../../../api/chat";
 
 function Header() {
-    const { setChat } = useContext(ChatContext)
     const { typing } = useContext(TypingContext)
-    const [clientHeader, setClientHeader] = useState<clientTypes>();
+    const { setChatClient, chatClient } = useContext(ChatClientContext)
     const params = useParams();
-    const navigate = useNavigate();
-
 
     useEffect(() => {
-        const guest_id = localStorage.getItem("guestId") || null
-        const store_name = params?.store_name;
+        // Pega o id do guest no localStorage, caso não tenha id, ele salvará como nulo
+        // e esse valor nulo será tratado no back-end.
+        const guest_id = localStorage.getItem("guestId") || null;
+        const store_name = params.store_name;
 
-        if (store_name) {
-            (async () => {
-                const client = await axios
-                    .get(`https://9e38-187-87-120-50.ngrok.io/client/${store_name}${guest_id ? `/guest/${guest_id}`: ""}`)
-                    .catch(err => console.log(err))
-                    
-                    console.log(client)
-                if (client?.status === 200) {
-                    const title = document.head.querySelector("title");
-                    title && (title.textContent = "Bem-vindo - " + client.data.business_name)
-                    client.data?.chat && setChat(client.data.chat[0].messages)
-                    setClientHeader(client.data)
-                }else navigate("/client-not-found")
-            })();
-        } else {
-            navigate("/client-not-found")
-        }
+        if (!store_name) throw new Error("Store name not found");
 
-
+        (async () => {
+            //busca todas as informações do chat
+            const chatInfo = await getChatInfo({ store_name, guest_id })
+            
+            if (chatInfo && chatInfo.status === 200) {
+                //muda o titulo da página para o nome da loja do cliente
+                const title = document.head.querySelector("title");
+                title && (title.textContent = "Bem-vindo - " + chatInfo.data.client.business_name);
+                //Salva os dados do chat em um state
+                setChatClient(chatInfo.data)
+            } else throw Error("Client not found.")
+        })();
     }, [])
 
     return (
-        clientHeader &&
+        chatClient &&
         <header className="w-full h-[70px] bg-green_main flex justify-around items-center">
 
             <div className="w-[15%] flex justify-center">
                 <div className="w-[40px] h-[40px] rounded-full overflow-hidden">
                     {
                         <img
-                            src={clientHeader?.logo || "https://i.ibb.co/XFHL0Bz/1000-F-589932782-v-QAEAZh-Hnq1-QCGu5ikwr-Ya-QD0-Mmurm0-N-removebg-preview.png"}
+                            src={chatClient.client.logo || "https://i.ibb.co/XFHL0Bz/1000-F-589932782-v-QAEAZh-Hnq1-QCGu5ikwr-Ya-QD0-Mmurm0-N-removebg-preview.png"}
                             alt="imagem do avatar"
                             className="w-full h-full object-contain"
                         />
@@ -59,7 +52,7 @@ function Header() {
                 <div className="flex gap-2 items-center">
                     <p className="font-semibold">
                         {
-                            clientHeader?.business_name ? clientHeader.business_name : "+55 (35) 99134-1..."
+                             chatClient.client.business_name || "+55 (35) 99134-1..."
                         }
                     </p>
                     <img
