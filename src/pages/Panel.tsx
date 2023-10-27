@@ -63,7 +63,7 @@ function Panel() {
 
             </div>
 
-            <div className="w-5/6">
+            <div className="w-5/6 hidden md:block">
 
                 <div className="w-full">
 
