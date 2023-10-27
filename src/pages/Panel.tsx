@@ -32,7 +32,7 @@ function Panel() {
     return (
         <div className="w-screen h-screen flex bg-dark">
 
-            <div className="w-1/6">
+            <div className="w-full md:w-1/6">
 
                 <div className="w-full h-full bg-blue_main2 border-r-2 border-blue_dark shadow-md shadow-blue_main flex flex-col gap-8 items-center">
 
