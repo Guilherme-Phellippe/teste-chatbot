@@ -1,5 +1,15 @@
 export interface clientTypes {
     logo: string, 
-    business_name: string,
-    client: clientTypes
+    fullname: string
+}
+
+export interface clientRegisterTypes{
+    email: string, 
+    password: string, 
+    fullname: string
+}
+
+export interface clientLoginTypes {
+    email: string,
+    password: string
 }
