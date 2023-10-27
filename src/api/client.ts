@@ -39,8 +39,6 @@ export async function loginClient({ email, password }: clientLoginTypes){
 
     const client = await axios.post(`${API_URL}/client/login`, { email, password }).catch(err => console.log(err))
 
-    console.log(client)
-
     return client
 
 }
