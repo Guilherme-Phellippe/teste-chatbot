@@ -55,7 +55,7 @@ function Register() {
                     >
                         <input
                             type="text"
-                            className="rounded-md p-2 w-full"
+                            className="rounded-md p-2 w-full bg-dark"
                             placeholder="Digite seu nome e sobrenome"
                             {...register("fullname")}
                         />
@@ -64,7 +64,7 @@ function Register() {
 
                         <input
                             type="email"
-                            className="rounded-md p-2 w-full"
+                            className="rounded-md p-2 w-full  bg-dark"
                             placeholder="Digite um e-mail válido"
                             {...register("email")}
                         />
@@ -73,7 +73,7 @@ function Register() {
 
                         <input
                             type="password"
-                            className="rounded-md p-2 w-full"
+                            className="rounded-md p-2 w-full  bg-dark"
                             placeholder="Digite sua senha"
                         />
                         <span className="w-full text-center text-red-600 bg-red-300/50">{errors.password?.message}</span>
@@ -81,7 +81,7 @@ function Register() {
 
                         <input
                             type="password"
-                            className="rounded-md p-2 w-full"
+                            className="rounded-md p-2 w-full  bg-dark"
                             placeholder="Confirme sua senha"
                             {...register("password")}
                         />

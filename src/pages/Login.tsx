@@ -44,7 +44,7 @@ function Login() {
                     >
                         <input
                             type="email"
-                            className="rounded-md p-2 w-full"
+                            className="rounded-md p-2 w-full  bg-dark"
                             placeholder="Digite seu email"
                             {...register("email")}
                         />
@@ -53,7 +53,7 @@ function Login() {
 
                         <input
                             type="password"
-                            className="rounded-md p-2 w-full"
+                            className="rounded-md p-2 w-full bg-dark"
                             placeholder="Digite sua senha"
                             {...register("password")}
                         />

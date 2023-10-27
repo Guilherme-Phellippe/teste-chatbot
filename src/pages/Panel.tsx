@@ -46,7 +46,7 @@ function Panel() {
         <div className="w-screen h-screen flex flex-col bg-dark ">
 
             <header
-                className="w-full h-[70px] shadow-sm shadow-blue_main flex justify-between items-center pr-4"
+                className="w-full h-[70px] shadow-sm shadow-blue_main flex justify-between items-center"
             >
                 <h2
                     className="text-zinc-100 w-1/2 md:w-1/5 md:min-w-[300px] h-full md:border-r-[1px] flex justify-center items-center border-zinc-100/50"
@@ -90,7 +90,7 @@ function Panel() {
                 <nav
                     className={`h-full w-1/5 min-w-[300px] bg-blue_main2 rounded-md ${navMenuIsOpen ? "translate-x-0 ":"-translate-x-[250px]"}`}
                 >
-                    <div className="w-full h-[10%] flex gap-2 justify-center items-center bg-blue_main2">
+                    <div className="w-full h-[12%] min-h-[80px] flex gap-2 justify-center items-center bg-blue_main2">
                         <div className="w-[60px] h-[60px] rounded-full overflow-hidden">
                             <img src={client?.logo || "https://via.placeholder.com/100"} alt="" />
                         </div>
@@ -102,7 +102,7 @@ function Panel() {
                         </div>
                     </div>
 
-                    <div className={`w-full h-[85%] flex flex-col justify-between bg-blue_main2 rounded-xl`}>
+                    <div className={`w-full h-[80%] flex flex-col justify-between bg-blue_main2 rounded-xl`}>
                         <ul className="w-full h-4/5 flex flex-col">
                             {
                                 navMenu.map(menu =>
